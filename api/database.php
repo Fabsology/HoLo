@@ -23,11 +23,16 @@ class Database {
     function getLocations(){
         $arrayStringList = '';
         for($i = 0; $i < count($this->locations); $i++) {
-            if ($i == count($this->locations)-1) {
-                $arrayStringList .= '"'.$this->locations[$i]->getName().'"';
-            } else {
-                $arrayStringList .= '"'.$this->locations[$i]->getName().'",';
+            if (!$this->conta( $arrayStringList, $this->locations[$i]->getName() )){
+                if ($i == count($this->locations)-1) {
+                        $arrayStringList .= '"'.$this->locations[$i]->getName().'"';
+                } else {
+                        $arrayStringList .= '"'.$this->locations[$i]->getName().'",';
+                }
             }
+        }
+        if (substr($arrayStringList, -1) == ",") {
+                $arrayStringList = substr($arrayStringList, 0,-1);
         }
         echo $arrayStringList;
     }
@@ -105,7 +110,7 @@ class Database {
         $returnString = "";
         foreach($this->pieces as $forPiece) {
             if($this->conta(strtolower($forPiece->getName()),strtolower($search))){
-                $returnString .= '<div class="listItem" style="background: linear-gradient(95deg, '.BACKGROUNDCOLOR.' 60%, '.$forPiece->getLocation()->getColor().' 60%); border-left: 50px solid '.$forPiece->getLocation()->getColor() .'; border-right: 20px solid '.$forPiece->getLocation()->getColor() .'; font-size: 32pt; color:'.$forPiece->getLocation()->getColor().'"><table><tr><td width="50%">' . $forPiece->getName() . '</span></td><td><span class="options" style="display: inline; position: absolute; right:20px; color: white; font-size: 5pt; height: auto; min-width: 30%;"><img src="img/edit.png" onclick="loadPage(\''.bin2hex($forPiece->getName()).'\')">' . '</span></td></tr></table></div>';
+                $returnString .= '<div class="listItem" style="background: linear-gradient(95deg, '.BACKGROUNDCOLOR.' 60%, '.$forPiece->getLocation()->getColor().' 60%); border-left: 50px solid '.$forPiece->getLocation()->getColor() .'; border-right: 20px solid '.$forPiece->getLocation()->getColor() .'; font-size: 32pt; color:'.$forPiece->getLocation()->getColor().'"><table><tr><td width="50%">' . $forPiece->getName() . '</span></td><td><span class="options" style="display: inline; position: absolute; right:20px; color: white; font-size: 5pt; height: auto; min-width: 30%;"><img src="img/show.png" onclick="loadPage(\''.bin2hex($forPiece->getName()).'\')">' . '</span></td></tr></table></div>';
             }
         }
         return $returnString;
