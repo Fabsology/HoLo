@@ -12,3 +12,9 @@ You can search your objects.
 ![](https://raw.githubusercontent.com/Fabsology/HoLo/main/screenshots/itemview.png)
 # Creation Form:
 ![](https://raw.githubusercontent.com/Fabsology/HoLo/main/screenshots/create.png)
+
+
+# Uses:
+https://github.com/mdbassit/Coloris
+
+https://jquery.org/license/
